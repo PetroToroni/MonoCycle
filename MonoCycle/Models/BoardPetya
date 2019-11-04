@@ -1,0 +1,35 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace MonoCycle.Models
+{
+    class Board : IDisposable
+    {
+        Wheel _koleso;
+        double _vaga;
+
+        private Board(WheelSize diameter, int sensors, double mass)
+        {
+            _koleso = Wheel.CreateWheel(diameter, sensors);
+            _vaga = mass + _koleso.Mass;
+            _koleso.SensorEvent += _wheel_SensorEvent;
+        }
+
+        private void _wheel_SensorEvent(int obj)
+        {
+
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            _koleso?.Dispose();
+        }
+
+        public Board GetBoard(WheelSize diameter, int sensors, double mass)
+        {
+            return new Board(diameter, sensors, mass);
+        }
+    }
+}
